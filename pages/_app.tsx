@@ -6,6 +6,7 @@ import {
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
+import NextNProgress from "nextjs-progressbar";
 import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "../components/Layout";
@@ -26,6 +27,7 @@ const MyApp = ({
                     <Hydrate state={pageProps.dehydratedState}>
                         <Layout>
                             <Component {...pageProps} />
+                            <NextNProgress />
                         </Layout>
                     </Hydrate>
                 </QueryClientProvider>
