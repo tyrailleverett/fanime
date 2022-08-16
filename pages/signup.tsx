@@ -41,6 +41,7 @@ const SignUpPage = () => {
                 <title>Sign Up</title>
             </Head>
             <main className="flex flex-col justify-around min-h-screen min-w-screen">
+                {/* TODO Change project name */}
                 <h1 className="font-black text-center sm:text-6xl">
                     Project Name
                 </h1>
