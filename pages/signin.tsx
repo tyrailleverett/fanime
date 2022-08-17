@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { signInFormSchema, signInFormSchemaType } from "../types/authschemas";
+import { signInFormSchema, signInFormSchemaType } from "../shared/authschemas";
 import { authOptions } from "./api/auth/[...nextauth]";
 
 const SignInPage = () => {

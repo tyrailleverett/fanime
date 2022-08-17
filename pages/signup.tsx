@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { signUpFormSchema, signUpFormSchemaType } from "../types/authschemas";
+import { signUpFormSchema, signUpFormSchemaType } from "../shared/authschemas";
 import customAxios from "../utils/axios";
 import { authOptions } from "./api/auth/[...nextauth]";
 

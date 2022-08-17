@@ -4,12 +4,12 @@ import { GetServerSideProps } from "next";
 import { unstable_getServerSession } from "next-auth/next";
 import { signOut } from "next-auth/react";
 import Head from "next/head";
-import { AppUser, IdProps } from "../types/types";
+import { AppUserType, IdProps } from "../shared/sharedtypes";
 import { getUser } from "../utils/helperfunctions";
 import { authOptions } from "./api/auth/[...nextauth]";
 
 const Home: NextPage<IdProps> = ({ id }) => {
-    useQuery<AppUser, Error>(["user"], () => getUser(id), {
+    useQuery<AppUserType, Error>(["user"], () => getUser(id), {
         onError: () => {
             signOut({ redirect: true, callbackUrl: "/signin" });
         }
