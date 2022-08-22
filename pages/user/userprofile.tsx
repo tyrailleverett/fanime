@@ -46,7 +46,7 @@ const UserProfile: NextPage<IDProps> = ({ id }) => {
                     <div className="flex items-center w-screen">
                         <div className="flex justify-center flex-1 ">
                             <FaLongArrowAltLeft
-                                onClick={() => router.push("/")}
+                                onClick={() => router.back()}
                                 className="text-4xl transition-all duration-100 hover:cursor-pointer hover:scale-125"
                             />
                         </div>
