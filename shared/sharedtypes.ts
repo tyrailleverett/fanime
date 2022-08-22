@@ -25,7 +25,7 @@ export interface AnimeType {
     image_url: string;
     synopsis: string;
     genres: GenreType[];
-    episodes: EpisodeType[];
+    episodes: number;
     score: number;
     popularity: number;
     members: number;
@@ -33,8 +33,11 @@ export interface AnimeType {
     recommendations: AnimeType[];
 }
 
+export interface WatchedAnimeType extends Omit<AnimeType, "episodes"> {
+    episodes: EpisodeType[];
+}
+
 export interface GenreType {
-    mal_id: number;
     name: string;
 }
 

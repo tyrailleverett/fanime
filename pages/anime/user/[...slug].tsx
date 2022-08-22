@@ -4,7 +4,11 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import EpisodeCard from "../../../components/episodecard/EpisodeCard";
-import { AnimeType, IDProps } from "../../../shared/sharedtypes";
+import {
+    EpisodeType,
+    IDProps,
+    WatchedAnimeType
+} from "../../../shared/sharedtypes";
 import customAxios from "../../../utils/axios";
 
 const getAnime = async (id: number) => {
@@ -18,7 +22,7 @@ const UserAnime = ({ id }: IDProps) => {
     const [isHovering, setIsHovering] = useState(false);
     const router = useRouter();
 
-    const { data: anime, isLoading } = useQuery<AnimeType, Error>(
+    const { data: anime, isLoading } = useQuery<WatchedAnimeType, Error>(
         ["anime"],
         () => getAnime(id)
     );
@@ -79,7 +83,7 @@ const UserAnime = ({ id }: IDProps) => {
                 <div className="grid w-5/6 grid-cols-4 gap-4 pb-10 mt-6 md:pb-20 md:w-full md:grid-cols-12">
                     {anime.episodes
                         .sort((a, b) => a.id - b.id)
-                        .map((episode, index) => (
+                        .map((episode: EpisodeType, index: number) => (
                             <EpisodeCard
                                 episode={episode}
                                 index={index + 1}
