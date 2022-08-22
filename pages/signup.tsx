@@ -41,10 +41,7 @@ const SignUpPage = () => {
                 <title>Sign Up</title>
             </Head>
             <main className="flex flex-col justify-around min-h-screen min-w-screen">
-                {/* TODO Change project name */}
-                <h1 className="font-black text-center sm:text-6xl">
-                    Project Name
-                </h1>
+                <h1 className="font-black text-center sm:text-6xl">Fanime</h1>
 
                 <section className="px-4 pt-10 border rounded shadow-full sm:max-w-xl sm:mx-auto sm:p-20 sm:pb-0">
                     <div>

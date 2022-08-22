@@ -9,7 +9,7 @@ import type { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
 import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import "../styles/globals.css";
 
 const MyApp = ({

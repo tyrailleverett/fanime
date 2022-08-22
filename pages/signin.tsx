@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { signInFormSchema, signInFormSchemaType } from "../shared/authschemas";
@@ -12,6 +13,7 @@ import { authOptions } from "./api/auth/[...nextauth]";
 
 const SignInPage = () => {
     const router = useRouter();
+    const [url, setUrl] = useState("");
 
     const {
         register,
@@ -33,8 +35,22 @@ const SignInPage = () => {
             return;
         }
         reset();
-        router.push("/");
+        if (url.includes("redirect")) {
+            router.push("/user/userwatchlist");
+        } else {
+            router.push("/");
+        }
     };
+
+    useEffect(() => {
+        if (window) {
+            const windowUrl = window.location.search;
+            setUrl(windowUrl);
+            if (windowUrl.includes("redirect")) {
+                toast.error("You must log in first view your animes");
+            }
+        }
+    }, []);
 
     return (
         <>
@@ -42,10 +58,7 @@ const SignInPage = () => {
                 <title>Sign In</title>
             </Head>
             <main className="flex flex-col justify-around min-h-screen min-w-screen">
-                {/* TODO Change project name */}
-                <h1 className="font-black text-center sm:text-6xl">
-                    Project Name
-                </h1>
+                <h1 className="font-black text-center sm:text-6xl">Fanime</h1>
                 <div className="px-4 pt-10 border rounded shadow-full sm:max-w-xl sm:mx-auto sm:p-20 sm:pb-0">
                     <div>
                         <h3 className="text-2xl font-semibold text-center">

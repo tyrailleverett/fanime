@@ -9,24 +9,32 @@ import { FaLongArrowAltLeft } from "react-icons/fa";
 import DeleteAccountButton from "../../components/userprofile/DeleteAccountButton";
 import ThemeSwitcher from "../../components/userprofile/ThemeSwitcher";
 import UserAvatar from "../../components/userprofile/UserAvatar";
-import { AppUserType, IdProps } from "../../shared/sharedtypes";
+import { AppUserType, IDProps } from "../../shared/sharedtypes";
 import { getUser } from "../../utils/helperfunctions";
 import { authOptions } from "../api/auth/[...nextauth]";
 
-const UserProfile: NextPage<IdProps> = ({ id }) => {
+const UserProfile: NextPage<IDProps> = ({ id }) => {
     const router = useRouter();
-    const { data, isLoading } = useQuery<AppUserType, Error>(
-        ["user"],
-        () => getUser(id),
-        {
-            onError: () => {
-                signOut({ redirect: true, callbackUrl: "/signin" });
-            },
-            onSettled: () => Nprogress.done()
-        }
-    );
+    const {
+        data: user,
+        isLoading,
+        isFetched
+    } = useQuery<AppUserType, Error>(["user"], () => getUser(id), {
+        onError: () => {
+            signOut({ redirect: true, callbackUrl: "/signin" });
+        },
+        onSettled: () => Nprogress.done()
+    });
 
     if (isLoading) Nprogress.start();
+
+    if (isFetched && !user) {
+        return (
+            <h2 className="flex items-center justify-center h-screen text-xl font-bold">
+                No User Found
+            </h2>
+        );
+    }
 
     return (
         <>
@@ -45,18 +53,18 @@ const UserProfile: NextPage<IdProps> = ({ id }) => {
 
                         <h1 className="flex items-center justify-center">
                             <span className="text-2xl font-bold ">
-                                Welcome {data?.user.username}
+                                Welcome {user?.user.username}
                             </span>
                         </h1>
                         <div className="flex-1"></div>
                     </div>
 
                     <div className="flex flex-col justify-center space-y-4">
-                        {data && <UserAvatar user={data.user} />}
+                        {user && <UserAvatar user={user.user} />}
 
                         <ThemeSwitcher />
                     </div>
-                    {data && <DeleteAccountButton id={data.user.id} />}
+                    {user && <DeleteAccountButton id={user.user.id} />}
                 </div>
             </main>
         </>
